@@ -3,8 +3,8 @@ import React, { useState, createContext } from 'react'
 const initState = {
   show: false,
   type: null,
-  title: null,
-  content: null
+  content: null,
+  identifier: Math.random()
 }
 
 export const SnackbarContext = createContext()
@@ -12,13 +12,12 @@ export const SnackbarContext = createContext()
 export const SnackbarProvider = ({ children }) => {
   const [snackBarStatus, setSnackBarStatus] = useState(initState)
 
-  const openSnackbar = (type, title, content, onClose) => {
+  const openSnackbar = (type, content) => {
     setSnackBarStatus({
       show: true,
       type,
-      title,
       content,
-      onClose
+      identifier: Math.random()
     })
   }
   const closeSnackbar = () => {
