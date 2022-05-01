@@ -37,7 +37,12 @@ const Short = () => {
   const shortUrl = async (e) => {
     openBackdrop()
     e.preventDefault()
-    if (!urlRef.current.value) return openSnackbar('error', '不要鬧啦！')
+    if (!urlRef.current.value) {
+      return () => {
+        closeBackdrop()
+        openSnackbar('error', '不是一個網址！')
+      }
+    }
     try {
       const url = new URL(urlRef.current.value)
     } catch (_) {
