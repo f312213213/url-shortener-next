@@ -50,6 +50,9 @@ const Short = () => {
           uid: authStatus.uid
         }
       })
+      if (response.status !== 200) {
+        throw new Error(await response.json())
+      }
       const res = await response.json()
       urlRef.current.value = ''
       customNameRef.current.value = ''

@@ -36,7 +36,7 @@ const ManagePage = () => {
   return (
       <>
         <Meta title={'檢視紀錄 | 好用的縮網址'} description={'快來用我！'} />
-        <div className="flex flex-col w-2/3 mt-4">
+        <div className="flex flex-col md:w-2/3 w-full px-2 md:px-0 mt-4">
           <table className="divide-y divide-gray-200 table-fixed dark:divide-gray-700 w-full h-full rounded-xl overflow-hidden">
             <thead className="bg-gray-100 dark:bg-gray-700">
             <tr>
