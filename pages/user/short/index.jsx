@@ -46,14 +46,15 @@ const Short = () => {
         body: JSON.stringify(sendData()),
         headers: {
           'user-agent': 'Mozilla/4.0 MDN Example',
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          uid: authStatus.uid
         }
       })
       const res = await response.json()
       urlRef.current.value = ''
       customNameRef.current.value = ''
       openSnackbar('success', '成功！以複製到剪貼簿！')
-      await navigator.clipboard.writeText(document.URL + res.shorted)
+      await navigator.clipboard.writeText(document.URL.replace(router.pathname, '') + '/' + res.shorted)
     } catch (err) {
       openSnackbar('error', '請稍後再試看看！')
     }

@@ -14,7 +14,12 @@ const ManagePage = () => {
 
   const getUrlDatas = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/record/${authStatus.uid}`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/record/${authStatus.uid}`, {
+        method: 'GET',
+        headers: {
+          uid: authStatus.uid
+        }
+      })
       const urlData = await response.json()
       setUrlDatas(JSON.parse(urlData.urlData))
     } catch (e) {
