@@ -6,7 +6,7 @@ import { AuthContext } from '@/context/useAuth'
 const Navbar = () => {
   const { authStatus, logout, login } = React.useContext(AuthContext)
   return (
-      <nav className={'w-full p-4 flex justify-around bg-black text-white fixed'}>
+      <nav className={'w-full p-4 flex justify-around bg-black text-white fixed dark:bg-gray-900'}>
         <Link href={'/'}>
           好用的縮網址
         </Link>

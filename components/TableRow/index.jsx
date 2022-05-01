@@ -2,7 +2,7 @@ import React from 'react'
 
 const TableRow = ({ clicks, created, customName, hashID, originalURL }) => {
   return (
-      <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
+      <tr className="hover:bg-gray-300 dark:hover:bg-gray-700 transition">
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
           {created}
         </td>

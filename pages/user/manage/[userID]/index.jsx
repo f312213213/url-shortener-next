@@ -5,15 +5,18 @@ import TableRow from '@/components/TableRow'
 import { AuthContext } from '@/context/useAuth'
 import { SnackbarContext } from '@/context/useSnackbar'
 import Meta from '@/components/Meta'
+import { BackdropContext } from '@/context/useBackdrop'
 
 const ManagePage = () => {
   const [urlDatas, setUrlDatas] = React.useState([])
   const { authStatus } = React.useContext(AuthContext)
+  const { openBackdrop, closeBackdrop } = React.useContext(BackdropContext)
   const { openSnackbar } = React.useContext(SnackbarContext)
   const router = useRouter()
 
   const getUrlDatas = async () => {
     try {
+      openBackdrop()
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/record/${authStatus.uid}`, {
         method: 'GET',
         headers: {
@@ -22,8 +25,10 @@ const ManagePage = () => {
       })
       const urlData = await response.json()
       setUrlDatas(JSON.parse(urlData.urlData))
+      closeBackdrop()
     } catch (e) {
       openSnackbar('error', '壞掉啦！')
+      closeBackdrop()
     }
   }
   React.useEffect(() => {
@@ -36,9 +41,9 @@ const ManagePage = () => {
   return (
       <>
         <Meta title={'檢視紀錄 | 好用的縮網址'} description={'快來用我！'} />
-        <div className="flex flex-col md:w-2/3 w-full px-2 md:px-0 mt-4">
+        <div className="flex flex-col md:w-11/12 w-full px-2 md:px-0 mt-4 shadow-md">
           <table className="divide-y divide-gray-200 table-fixed dark:divide-gray-700 w-full h-full rounded-xl overflow-hidden">
-            <thead className="bg-gray-100 dark:bg-gray-700">
+            <thead className="bg-gray-200 dark:bg-gray-900">
             <tr>
               <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 Created time
@@ -57,11 +62,11 @@ const ManagePage = () => {
               </th>
             </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+            <tbody className="bg-gray-100 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             {
-              urlDatas.map((urlData, i) => (
+              urlDatas.map((urlData) => (
                   <TableRow
-                      key={i}
+                      key={urlData.custom_name || urlData.hash_id}
                       clicks={urlData.clicks}
                       created={urlData.created}
                       customName={urlData.custom_name}
