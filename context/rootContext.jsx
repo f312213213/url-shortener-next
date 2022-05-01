@@ -1,5 +1,6 @@
 import React from 'react'
 import { initializeApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
 
 import { SnackbarProvider } from '@/context/useSnackbar'
 import { BackdropProvider } from '@/context/useBackdrop'
@@ -17,6 +18,9 @@ const RootContext = ({ children }) => {
   }
 
   const app = initializeApp(firebaseConfig)
+  React.useEffect(() => {
+    const analytics = getAnalytics(app)
+  }, [])
   return (
       <SnackbarProvider>
         <BackdropProvider>
