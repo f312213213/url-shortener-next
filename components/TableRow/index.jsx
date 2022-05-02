@@ -1,6 +1,16 @@
 import React from 'react'
+import { AiFillCopy } from 'react-icons/ai'
+import { useRouter } from 'next/router'
+import { SnackbarContext } from '@/context/useSnackbar'
 
 const TableRow = ({ clicks, created, customName, hashID, originalURL }) => {
+  const { openSnackbar } = React.useContext(SnackbarContext)
+  const router = useRouter()
+
+  const copy = (path) => {
+    navigator.clipboard.writeText(document.URL.replace(router.asPath, '') + '/' + path)
+    return openSnackbar('success', '已複製！')
+  }
   return (
       <tr className="hover:bg-gray-300 dark:hover:bg-gray-600 transition">
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
@@ -13,9 +23,21 @@ const TableRow = ({ clicks, created, customName, hashID, originalURL }) => {
         </td>
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
           {hashID || '-'}
+          {
+            hashID &&
+              <button onClick={() => copy(hashID)}>
+                <AiFillCopy />
+              </button>
+          }
         </td>
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
           {customName || '-'}
+          {
+              customName &&
+              <button onClick={() => copy(customName)}>
+                <AiFillCopy />
+              </button>
+          }
         </td>
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
           {clicks}
