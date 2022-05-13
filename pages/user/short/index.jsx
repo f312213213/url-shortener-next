@@ -34,6 +34,26 @@ const Short = () => {
     }
   }
 
+  const errorHandling = (err) => {
+    switch (err.status) {
+      case 406: {
+        return openSnackbar('error', '有重複的縮網址了！')
+      }
+      case 403: {
+        return openSnackbar('error', '請確認輸入正確！')
+      }
+      case 405: {
+        return openSnackbar('error', '方法錯了！')
+      }
+      case 404: {
+        return openSnackbar('error', '找不到這個網址！')
+      }
+      default: {
+        return openSnackbar('error', '伺服器出了問題！')
+      }
+    }
+  }
+
   const shortUrl = async (e) => {
     openBackdrop()
     e.preventDefault()
@@ -60,7 +80,7 @@ const Short = () => {
         }
       })
       if (response.status !== 200) {
-        throw new Error(await response.json())
+        throw response
       }
       const res = await response.json()
       urlRef.current.value = ''
@@ -69,7 +89,7 @@ const Short = () => {
       closeBackdrop()
       await navigator.clipboard.writeText(document.URL.replace(router.pathname, '') + '/' + res.shorted)
     } catch (err) {
-      openSnackbar('error', '請稍後再試看看！')
+      errorHandling(err)
       closeBackdrop()
     }
   }

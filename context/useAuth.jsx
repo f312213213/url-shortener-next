@@ -1,18 +1,22 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+
 import { SnackbarContext } from '@/context/useSnackbar'
+import { BackdropContext } from '@/context/useBackdrop'
 
 export const AuthContext = React.createContext()
 
 export const AuthProvider = ({ children }) => {
   const { openSnackbar } = React.useContext(SnackbarContext)
+  const { openBackdrop, closeBackdrop } = React.useContext(BackdropContext)
   const [authStatus, setAuthStatus] = React.useState({})
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
   const router = useRouter()
 
   const login = () => {
+    openBackdrop()
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result)
@@ -30,6 +34,7 @@ export const AuthProvider = ({ children }) => {
         })
           .then((response) => {
             setAuthStatus(user)
+            closeBackdrop()
             openSnackbar('success', `Hi ${user.displayName}`)
             return router.push(`/user/manage/${user.uid}`)
           })

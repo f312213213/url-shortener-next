@@ -9,7 +9,7 @@ export const BackdropContext = createContext()
 export const BackdropProvider = ({ children }) => {
   const [backdropStatus, setBackdropStatus] = useState(initState)
 
-  const openBackdrop = (type, title, content, onClose) => {
+  const openBackdrop = () => {
     setBackdropStatus({
       show: true
     })
