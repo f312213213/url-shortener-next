@@ -39,14 +39,12 @@ export const AuthProvider = ({ children }) => {
             return router.push(`/user/manage/${user.uid}`)
           })
           .catch((e) => {
+            closeBackdrop()
             openSnackbar('error', '故障啦！')
           })
       })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        const email = error.email
-        const credential = GoogleAuthProvider.credentialFromError(error)
+      .catch(() => {
+        closeBackdrop()
         openSnackbar('error', '故障啦！')
       })
   }
