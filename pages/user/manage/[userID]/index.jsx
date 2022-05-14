@@ -42,27 +42,27 @@ const ManagePage = () => {
       <>
         <Meta title={'檢視紀錄 | 好用的縮網址'} description={'快來用我！'} />
         <div className="flex flex-col md:w-11/12 w-full px-2 md:px-0 mt-4 shadow-md">
-          <table className="divide-y divide-gray-200 table-fixed dark:divide-gray-700 w-full h-full rounded-xl overflow-hidden">
-            <thead className="bg-gray-200 dark:bg-gray-900">
-            <tr>
-              <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
+          <table className="table divide-y divide-gray-200 table-fixed dark:divide-gray-700 w-full h-full rounded-xl overflow-hidden">
+            <thead className="bg-gray-200 dark:bg-gray-900 ">
+            <tr className={'table-row'}>
+              <th scope="col" className="hidden md:table-cell py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 Created time
               </th>
-              <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
+              <th scope="col" className="table-cell py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 original url
               </th>
-              <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
+              <th scope="col" className="table-cell py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 hash id
               </th>
-              <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
+              <th scope="col" className="table-cell py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 custom name
               </th>
-              <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
+              <th scope="col" className="hidden md:table-cell py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 text-center">
                 clicked time
               </th>
             </tr>
             </thead>
-            <tbody className="bg-gray-100 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+            <tbody className="table-row-group bg-gray-100 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             {
               urlDatas.map((urlData) => (
                   <TableRow
