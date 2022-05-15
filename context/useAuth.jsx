@@ -40,12 +40,12 @@ export const AuthProvider = ({ children }) => {
           })
           .catch((e) => {
             closeBackdrop()
-            openSnackbar('error', '故障啦！')
+            openSnackbar('error', '登入失敗！')
           })
       })
       .catch(() => {
         closeBackdrop()
-        openSnackbar('error', '故障啦！')
+        openSnackbar('error', '登入失敗！')
       })
   }
 
